@@ -30,7 +30,6 @@ def main():
     
     # tuple features
     print("\nAdditional Tuple Operations:")
-
     print(f"First course: {programming_classes[0]}")
     print(f"Last course: {programming_classes[-1]}")
     print(f"Middle courses: {programming_classes[2:4]}")
