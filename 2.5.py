@@ -1,53 +1,53 @@
 def main():
-    import re  
+    import re
     
-    SYMBOLS = set('!@#$%&*')
+    SYMBOLS = {'!', '@', '#', '$', '%', '&', '*'}
     
-    print("Welcome to Password Validator")
-    print("Your password must meet the following requirements:")
-    print("- 8 to 20 characters long")
-    print("- At least one uppercase letter")
-    print("- At least one lowercase letter")
-    print("- At least one number")
-    print("- At least one symbol (!@#$%&*)")
-    
-    while True:
-        try:
-            while True:
-                password1 = input("\nEnter your password: ")
-                
-                if len(password1) < 8 or len(password1) > 20:
-                    print("Password must be between 8 and 20 characters.")
-                    continue
-                
-                if not any(char.isupper() for char in password1):
-                    print("Password must contain at least one uppercase letter.")
-                    continue
-                
-                if not any(char.islower() for char in password1):
-                    print("Password must contain at least one lowercase letter.")
-                    continue
-                
-                if not any(char.isdigit() for char in password1):
-                    print("Password must contain at least one number.")
-                    continue
-                
-                if not any(char in SYMBOLS for char in password1):
-                    print("Password must contain at least one symbol (!@#$%&*).")
-                    continue
-                
-                break 
-            
-            password2 = input("Confirm your password: ")
-            
-            if password1 == password2:
-                print("\nSuccess! Your password has been set.")
-                break
-            else:
-                print("Passwords do not match. Please try again.")
+    def validate_password(password):
+        """Validate password against all criteria."""
+        errors = []
         
-        except Exception as e:
-            print(f"An error occurred: {e}. Please try again.")
+        errors += ["Password must be 8-20 characters long."] if len(password) < 8 or len(password) > 20 else []
+        
+        errors += ["Password must contain at least one uppercase letter."] if not any(char.isupper() for char in password) else []
+        
+        errors += ["Password must contain at least one lowercase letter."] if not any(char.islower() for char in password) else []
+        
+        errors += ["Password must contain at least one number."] if not any(char.isdigit() for char in password) else []
+        
+        errors += ["Password must contain at least one symbol (!@#$%&*)."] if not any(char in SYMBOLS for char in password) else []
+        
+        return errors
+    
+    def get_valid_password():
+        """Get a password that meets all criteria."""
+        print("Welcome to Password Validator")
+        print("Your password must meet the following requirements:")
+        print("- 8 to 20 characters long")
+        print("- At least one uppercase letter")
+        print("- At least one lowercase letter")
+        print("- At least one number")
+        print("- At least one symbol (!@#$%&*)")
+        
+        password = input("\nEnter your password: ")
+        errors = validate_password(password)
+        
+        def handle_errors(errors):
+            print("\nInvalid password. Please fix the following:")
+            for error in errors:
+                print(f"- {error}")
+            return get_valid_password()
+        
+        return password if not errors else handle_errors(errors)
+    
+    def confirm_password(password):
+        """Confirm the password matches."""
+        confirm = input("Confirm your password: ")
+        return "Success! Your password has been set." if password == confirm else confirm_password(password)
+    
+    valid_password = get_valid_password()
+    result = confirm_password(valid_password)
+    print(result)
 
 if __name__ == "__main__":
     main()
