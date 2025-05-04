@@ -1,0 +1,12 @@
+Date: 5/4/2025
+Time: 5:25 pm
+Entry: Hello
+
+Date: 5/4/2025\
+Time: 5:35 pm
+Entry: this is my second entry
+
+Date: 4/11/2055
+Time: 1:00 pm
+Entry: I turned 50 today
+
