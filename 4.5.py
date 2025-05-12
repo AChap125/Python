@@ -1,17 +1,12 @@
 from datetime import datetime, timedelta
 
 def main():
-    """
-    Main function that calculates a person's age in different units
-    based on their birthday input.
-    """
-    
     print("Welcome to the Age Calculator!")
     print("Please enter your birthday:")
     
     try:
         year = int(input("What year were you born? "))
-        month = int(input("What month were you born (as a number, May would be 5)? "))
+        month = int(input("What month were you born (as a number)? "))
         day = int(input("What day of the month were you born? "))
         
         birthday = datetime(year, month, day)
